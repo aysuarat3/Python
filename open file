@@ -1,0 +1,6 @@
+#!/usr/bin/python3 
+import pandas as pd 
+dosya = 'C:/Users/arata/Desktop/deneme.csv' 
+veri = pd.read_csv(dosya, delimiter=";", nrows = 1048574) 
+ 
+print(veri) 
