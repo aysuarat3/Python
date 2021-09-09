@@ -1,0 +1,47 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.cm as cm
+from keras import backend as K
+import matplotlib.pyplot as plt
+from keras.optimizers import SGD
+from keras.utils import np_utils
+from keras.models import Sequential
+from sklearn.preprocessing import LabelEncoder,OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+
+dosya = 'C:/Users/arata/Desktop/TRAVEL DATATHON/deneme.csv' 
+veri = pd.read_csv(dosya, delimiter=";", nrows = 1048574) 
+ 
+ 
+seed = 7
+np.random.seed(seed)
+veri.drop(['CUST_KEY','PRIM_TKT_NUM','ORGN_AP', 'DSTN_AP', 'CITY_NM', 
+                'CNTRY_NM', 'ORG_CITY_NM','ORG_CNTRY_NM', 'DOM_INTNL_FLAG',  
+                 'SEG_LCL_DEP_DT', 'TOP1_ORG_CTY'], axis=1, inplace=True) 
+veri.shape 
+(440, 6) 
+print(veri) 
+
+
+
+categories=pd.Categorical(veri['TOP1_ORG_MKT_REGN'],categories=['Domestic','America','Central Europe',
+                                                                      'North Europe','Middle East - Cyprus','Asia - Far East',
+                                                                      'South Europe','Sub - Saharan Africa','Eastern Europe and Balkans',
+                                                                      'North Africa','Northern Europe'],ordered=True)
+
+df = pd.Categorical(categories)
+print(categories)
+
+unique = pd.factorize(categories,sort=True)
+veri['TOP1_ORG_MKT_REGN'] = 'TOP1_ORG_MKT_REGN'
+veri['TOP1_ORG_MKT_REGN']
+print(unique)
+
+
+JRNY_TYP=veri.iloc[:,0:1].values
+print(JRNY_TYP)
+
+JRNY_TYP[:,0]=LabelEncoder().fit_transform(JRNY_TYP[:,0])
+print(JRNY_TYP)
