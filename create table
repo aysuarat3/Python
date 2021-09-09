@@ -1,1 +1,14 @@
-
+#!/usr/bin/python3 
+import pandas as pd 
+dosya = 'C:/Users/arata/Desktop/deneme.csv' 
+veri = pd.read_csv(dosya, delimiter=";", nrows = 1048574) 
+ 
+print(veri)  
+ 
+veri.columns = ['CUST_KEY','PRIM_TKT_NUM','ORGN_AP', 'DSTN_AP', 'CITY_NM', 
+                'CNTRY_NM', 'ORG_CITY_NM','ORG_CNTRY_NM', 'DOM_INTNL_FLAG',  
+                'TOP1_ORG_MKT_REGN','TOP1_ORG_CITY', 'JRNY_TYP', 'SEG_LCL_DEP_DT'] 
+veri.drop(['TOP1_ORG_CITY', 'JRNY_TYP'], axis=1, inplace=True)
+veri.shape
+(440, 6) 
+print(veri)
