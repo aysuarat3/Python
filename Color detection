@@ -9,7 +9,7 @@ while(True):
     output_frame = captured_frame.copy()
 
     captured_frame_rgb = cv2.cvtColor(captured_frame, cv2.COLOR_RGBA2RGB)
-    captured_frame_rgb = cv2.medianBlur(captured_frame_bgr, 3) 
+    captured_frame_rgb = cv2.medianBlur(captured_frame_rgb, 3) 
     captured_frame_lab = cv2.cvtColor(captured_frame_rgb, cv2.RGB2Lab)    
     captured_frame_lab_red = cv2.inRange(captured_frame_lab, np.array([20, 150, 150]), np.array([190, 255, 255]))    
     captured_frame_lab_red = cv2.GaussianBlur(captured_frame_lab_red, (5, 5), 2, 2)    
