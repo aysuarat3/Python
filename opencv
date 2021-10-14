@@ -1,0 +1,18 @@
+#!/usr/bin/python3 
+import cv2
+import numpy as np
+
+image = cv2.imread("logo.png", 0)
+#griye çevirmek için 0 kullandık. Kanallarını kullanmak istemediğimizi belirttik. RGB fonksiyonu görmek için 0 silmemiz yeterli
+
+#ekranda gösterme fonksiyonu : imshow
+cv2.imshow("industrial engineer", image)
+
+#yazdıralım ve yeni oluşturduğumuz resmi kaydedelim
+cv2.imwrite("newgraduate.png", image)
+
+
+#kapanışta kullanmamız gerek temel bir iskelet, pencere kapanması için herhangi bir tuşa basmanız yeterli
+cv2.waitKey(0)
+#tüm sekmeleri kapatır
+cv2.destroyALLWindows()
