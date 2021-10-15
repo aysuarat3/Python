@@ -1,0 +1,7 @@
+#!/usr/bin/python3 
+import time
+import face_recognition
+import cv2
+video = "C:/Users/arata/Desktop/IMG_6879_Trim.mp4"
+capture = cv2.VideoCapture(video)
+face_image = face_recognition.load_image_file("C:/Users/arata/Desktop/face.png"
