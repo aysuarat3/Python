@@ -3,15 +3,43 @@ import cv2
 import numpy as np
 
 image = cv2.imread("logo.png", 0)
-
+# 50 ile 30 pixel değerini beyaz rengine boyayalım. Yani saoldan 50 sağdan 30 olan pixel değerlerimizi 255 pixel değerlerine eşitledik, dilersek değerleri değiştirebiliriz.
+image[50, 30]=[255,255,255]
 #griye çevirmek için 0 kullandık. Kanallarını kullanmak istemediğimizi belirttik. RGB fonksiyonu görmek için 0 silmemiz yeterli
 #ekranda gösterme fonksiyonu : imshow
 cv2.imshow("industrial engineer", image)
 
+
+#bu döngüye bir beyaz çizdirelim, resmin sol üst köşesini baz alarak 70 piksel aşağıya i piksel kadar yani 100 piksel kadar da sağaya boyasın
+for i in range(100):
+    iamge[70, i] = [255,255,255]
+  
+#blue efekti vermek için
+image[:,:,0] = 255
+#green efekti verelim
+image[:,:,1]
+#red efekti verelim
+image[:,:,2]
+#sarı yapalım, bunları rastgele yapabilirsiniz ben sarıyı seçtim
+image[:,:,1]
+image[:,:,2]
+  
+  
+  
+ 
+#resimde soldan 230, sağdan 80 pixel kesim yapmak için
+print(image[(230,80)]
 #matrixleri terminalde görmek için resmi print yapmak gerekir.
 print(image)
 #boyutları görmek için 
 print(image.size)
+#engineer string yazılı ifade ile resmin boyutu kaç ise string içine alarak bize gösterecektir. 
+#mühendisin kaç pixel de göründüğünü ve hangi tip mühendis olduğunu anlamak için önce bir yazdıralım.   
+print("engineer : " + str(image.size))     
+print("engineer features: " + str(image.shape)) #rgb değeri gelir.
+print("engineer type : " + str(image.dtype)) #neyin ne olduğunu görmek için detaylıca yazdık. 
+      
+ 
 #hangi veri tipinde yazıldığını görmek için, her bir piksel 8 bitte yazılır, 0 ile 255 arası pixel değişiklği olur.
 # {1,1,1,1,1,1} = 2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255
 print(image.dtype)
@@ -25,3 +53,6 @@ cv2.imwrite("newgraduate.png", image)
 cv2.waitKey(0)
 #tüm sekmeleri kapatır
 cv2.destroyALLWindows()
+
+
+
