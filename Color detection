@@ -21,10 +21,10 @@ while(True):
     captured_frame_lab_red = cv2.inRange(captured_frame_lab, np.array([20, 150, 150]), np.array([190, 255, 255])) 
 #daha fazla gürültüyü azaltmak için ikinci bulanıklığı yapacağız. GussianBlur filtesi ile daha kolay daire algılama işlemi gerçekleşecek.
     captured_frame_lab_red = cv2.GaussianBlur(captured_frame_lab_red, (5, 5), 2, 2)    
-#görüntüdeki daireleri algılamak için HOUGH dönüşümünü kullanın
+#görüntüdeki daireleri algılamak için HOUGH dönüşümünü kullanalım
     circles = cv2.HoughCircles(captured_frame_lab_red, cv2.HOUGH_GRADIENT, 1, captured_frame_lab_red.shape[0] / 8, param1=100, param2=18, minRadius=5, maxRadius=60)
 
-# Bir daire çıkardıysak, bir anahat çizelim
+# Bir daire çıkardıysak, bir ana hat çizelim
 # Burada sadece bir tane referans nesnesi olacağı için sadece bir daire tespit etmemiz gerekiyor.
 	
     if circles is not None:
