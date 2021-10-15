@@ -1,31 +1,42 @@
 #!/usr/bin/python3 
 import numpy as np
 import cv2
-
 cap = cv2.VideoCapture(0)
 
 while(True):
+	
+#kare kare yakalamak için
     ret, captured_frame = cap.read()
     output_frame = captured_frame.copy()
-
+#Lab yalnızca RGB de mevcut olduğundan, orijinal görüntüyü RGB'ye dönüştürelim.
     captured_frame_rgb = cv2.cvtColor(captured_frame, cv2.COLOR_RGBA2RGB)
+	
+#renk alanı dönüştürmeden önce paraziti azaltmak için filtreleme aşamasında ilk bulanıklaştırma 
     captured_frame_rgb = cv2.medianBlur(captured_frame_rgb, 3) 
+#lab renk uzayına dönüştürelim, burada sadece bir kanalı (a-kanalı) kırmızı için kontrol etmemiz gerekiyor
     captured_frame_lab = cv2.cvtColor(captured_frame_rgb, cv2.RGB2Lab)    
-    captured_frame_lab_red = cv2.inRange(captured_frame_lab, np.array([20, 150, 150]), np.array([190, 255, 255]))    
+#lab görüntüsünü eşleyelim, sadece kırmızı pikselleri korumaya çalışacağız.
+# Olası sarı eşik: [20, 110, 170][255, 140, 215]
+# Olası mavi eşik: [20, 115, 70][255, 145, 120]
+    captured_frame_lab_red = cv2.inRange(captured_frame_lab, np.array([20, 150, 150]), np.array([190, 255, 255])) 
+#daha fazla gürültüyü azaltmak için ikinci bulanıklığı yapacağız. GussianBlur filtesi ile daha kolay daire algılama işlemi gerçekleşecek.
     captured_frame_lab_red = cv2.GaussianBlur(captured_frame_lab_red, (5, 5), 2, 2)    
+#görüntüdeki daireleri algılamak için HOUGH dönüşümünü kullanın
     circles = cv2.HoughCircles(captured_frame_lab_red, cv2.HOUGH_GRADIENT, 1, captured_frame_lab_red.shape[0] / 8, param1=100, param2=18, minRadius=5, maxRadius=60)
 
-
+# Bir daire çıkardıysak, bir anahat çizelim
+# Burada sadece bir tane referans nesnesi olacağı için sadece bir daire tespit etmemiz gerekiyor.
 	
     if circles is not None:
         circles = np.round(circles[0, :]).astype("int")
         cv2.circle(output_frame, center=(circles[0, 0], circles[0, 1]), radius=circles[0, 2], color=(0, 255, 0), thickness=2)
-
+#ortaya çıkan kareyi görüntüleyelim ve q ile çıkalım !! important
    
     cv2.imshow('frame', output_frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+#her şey bittiğine göre görüntü almayı bırakalım fonskiyonu kapatalım. 
 
 cap.release()
 cv2.destroyAllWindows()
