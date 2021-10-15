@@ -17,14 +17,15 @@ for i in range(100):
 #blue efekti vermek için
 image[:,:,0] = 255
 #green efekti verelim
-image[:,:,1]
+image[:,:,1] = 255
 #red efekti verelim
-image[:,:,2]
+image[:,:,2] = 255
 #sarı yapalım, bunları rastgele yapabilirsiniz ben sarıyı seçtim
-image[:,:,1]
-image[:,:,2]
+image[:,:,1] = 255
+image[:,:,2] = 255
   
-  
+#kesit alalım bir resimden
+kesit = image[50:100, 300:400]
   
  
 #resimde soldan 230, sağdan 80 pixel kesim yapmak için
@@ -33,6 +34,8 @@ print(image[(230,80)]
 print(image)
 #boyutları görmek için 
 print(image.size)
+#sağ aşağıya mavi bir piksel ile boyayalım. Rasgele değer verebilirsiniz.      
+image[300:500,600:900,0] = 255 
 #engineer string yazılı ifade ile resmin boyutu kaç ise string içine alarak bize gösterecektir. 
 #mühendisin kaç pixel de göründüğünü ve hangi tip mühendis olduğunu anlamak için önce bir yazdıralım.   
 print("engineer : " + str(image.size))     
