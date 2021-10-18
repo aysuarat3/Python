@@ -1,2 +1,2 @@
 # Python
-Open file, create table, data preprocessing, data cleaning
+All about Python and especially ; Data Analysis, Image processing, Raspberry pi software(ex.linux), dronekit, etc. 
