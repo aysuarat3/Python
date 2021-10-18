@@ -1,0 +1,83 @@
+import threading
+
+def calistir(threadName):
+    for i in range(7):
+        print(threadName, "çalışıyor"
+       
+t1 = threading.Thread(target=calistir, args = ("thread-1", ))
+t2 = threading.Thread(target=calistir, args = ("thread-21, ))
+
+t1.start()
+t2.start()
+
+#Thread daemon kavramı
+
+import time 
+
+def zaman():
+    while True:
+        time.sleep(1)
+        print(time.ctime(time.time()))
+        
+        
+def calistir(threadName):
+    for i in range(5):
+        time.sleep(1)
+        print(threadName, "çalışıyor")
+        
+        
+t1 = threading.Thread(target = zaman, daemon=True)
+t2 = threading.Thread(target = calistir, args = ("thread-2"))
+
+t1.start()
+t2.start()
+
+
+
+#queue
+
+import threading, queue
+
+q = queue.Queue()
+
+liste = ['Ankara', 'İstanbul', 'Kayseri']
+
+def islem(threadName, q):
+    global liste
+    while not q.empty():
+        item = q.empty():
+        print(f"{threadName} Çıkarılarak eleman : {item}")
+        q.task_done()
+        
+  
+for i in liste:
+    q.put(i)
+    
+for i in range(2):
+    worker = threading.Thread(target=islem, args=(f"Thread-{i}", q), daemon=True)
+    worker.start()
+    
+q.join()  #ekran çıktısı program kaç defa çalışırsa çalışsın hep aynı sırayla elemanları verecek şekilde olacaktır.
+
+
+
+
+# import queue : Queue kütüphanesini projeye ekliyoruz
+#q = queue.Queue(): Kuyruk değişkenimizi oluşturuyoruz.
+#q.put(i) : Kuyruğa yeni bir eleman eklerken put() fonksiyonu kullanılır
+#item = q.qet(): Kuyrukta sıradaki elemanı almak çin get() fonksiyonu kullanılır.
+#q.task_done():En son alınan eleman ile işlemin bittiğini, sıradaki elemanın verilebileceğini belirtir.Kısaca kilit mekanizmasıdır.
+#q.qoin():Liste boşalana kadar programın kapanmasına izin vermez. Daemon thread kullanırsanız zorunludur.
+
+#Sonuç olarak eğer işlem sırası önemliyse kuyruk yapısını kullanmanız gerekir.
+
+
+
+
+
+
+
+
+
+
+
