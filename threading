@@ -1,3 +1,5 @@
+#!/usr/bin/python3 
+
 import threading
 
 def calistir(threadName):
@@ -70,14 +72,3 @@ q.join()  #ekran çıktısı program kaç defa çalışırsa çalışsın hep ay
 #q.qoin():Liste boşalana kadar programın kapanmasına izin vermez. Daemon thread kullanırsanız zorunludur.
 
 #Sonuç olarak eğer işlem sırası önemliyse kuyruk yapısını kullanmanız gerekir.
-
-
-
-
-
-
-
-
-
-
-
