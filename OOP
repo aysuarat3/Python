@@ -1,0 +1,19 @@
+class Employee:
+   'Common base class for all employees'
+   empCount = 0
+   
+#empCount değişkeni değeri bu sınıftaki tüm örnekler arasında paylaşılan bir sınıf değişkenidir. Buna sınıfın içinden veya sınıfın dışından Employee.empCount olarak erişilebilir.
+#İlk yöntem __init__(), bu sınıfın yeni bir örneğini oluşturduğumuzda Python'un çağırdığı sınıf oluşturucusu veya başlatma yöntemi olarak adlandırılan özel bir yöntemdir.
+#Python, self argümanını bizim için listeye ekler; metotları çağırdığınızda dahil etmenize gerek yoktur.
+
+   def __init__(self, name, salary):
+      self.name = name
+      self.salary = salary
+      Employee.empCount += 1
+   
+   
+   def displayCount(self):
+     print ("Total Employee %d" % Employee.empCount)
+
+   def displayEmployee(self):
+      print ("Name : ", self.name,  ", Salary: ", self.salary)
