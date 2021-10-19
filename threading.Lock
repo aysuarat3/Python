@@ -1,0 +1,113 @@
+import threading
+import time
+
+
+"""
+lock = threading.Lock()
+count = 0
+
+def entry_point(args):
+    global count
+    for x in range(0, 10):
+        time.sleep(1)
+        with lock:
+            count = count + 1
+    pass
+
+
+
+thread = threading.Thread(target=entry_point, args=("hello", ))
+thread.start()
+
+for x in range(0, 10):
+    time.sleep(1)
+    lock.acquire()
+    print("main thread %d" % (count))
+    if count == 8:
+        thread.destroy()
+    lock.release()
+    pass
+
+thread.join()
+
+"""
+
+"""
+event = threading.Event()
+run = threading.Event()
+lock = threading.Lock()
+count = 0
+
+def increment_callback(t2):
+    global count
+    for x in range(0, 16):
+        event.clear()
+        count = count + 1
+        event.set()
+        time.sleep(1)
+        pass
+    run.set()
+    pass
+
+
+def factory_r(x):
+    if x == 1:
+        return x
+    else:
+        return x * factory_r(x - 1)
+    pass
+
+def factory_callback(args):
+    while not run.is_set():
+        event.wait(0.01)
+        if event.is_set():
+            result = factory_r(count)
+            print("result %d %d" % (count, result))
+            event.clear()
+        pass
+    pass
+
+
+t2 = threading.Thread(target=factory_callback, args=(1,))
+t1 = threading.Thread(target=increment_callback, args=(t2,))
+
+
+
+t1.start()
+t2.start()
+t2.join()
+"""
+
+# source code example
+var_s = 0
+
+def fetch_bigtable_rows(big_table, keys, other_silly_variable=None):
+    """Fetches rows from a Bigtable.
+
+    Retrieves rows pertaining to the given keys from the Table instance
+    represented by big_table.  Silly things may happen if
+    other_silly_variable is not None.
+
+    Args:
+        big_table: An open Bigtable Table instance.
+        keys: A sequence of strings representing the key of each table row
+            to fetch.
+        other_silly_variable: Another optional variable, that has a much
+            longer name than the other args, and which does nothing.
+
+    Returns:
+        A dict mapping keys to the corresponding table row data
+        fetched. Each row is represented as a tuple of strings. For
+        example:
+
+        {'Serak': ('Rigel VII', 'Preparer'),
+         'Zim': ('Irk', 'Invader'),
+         'Lrrr': ('Omicron Persei 8', 'Emperor')}
+
+        If a key from the keys argument is missing from the dictionary,
+        then that row was not found in the table.
+
+    Raises:
+        IOError: An error occurred accessing the bigtable.Table object.
+    """
+    pass
