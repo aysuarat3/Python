@@ -1,0 +1,123 @@
+from datetime import date
+# ---
+global_student_id = 2021010101
+
+
+
+
+class Student:
+    name:str = None
+    surname:str = None
+    age:int = 0
+    id:int
+    def __init__(self, name, surname):
+        self.id = Student.generate_id()
+        self.name = name
+        self.surname = surname
+        # print("call init")
+        pass
+    def __del__(self):
+        # print(f"deleted {self.name}")
+        pass
+    def __str__(self):
+        return f"{self.__get_fullname()} {self.id} {self.age}"
+    def calculate_age(self, born) -> bool:
+        today = date.today()
+        self.age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        if self.age < 13:
+            return False
+        return True
+    @staticmethod
+    def generate_id() -> int:
+        global global_student_id
+        global_student_id = global_student_id + 1
+        return global_student_id
+    def __get_fullname(self) -> str:
+        return f"{self.name} {self.surname}"
+
+    def __add__(self, other):
+        return Student( self.name + other.name, self.surname + other.surname)
+    pass
+
+
+"""
+ahmet = Student(2021010101, "ahmet", "culluk")
+if ahmet.calculate_age( date(2002, 7, 5) ) == False:
+    print("ahmet kucuk")
+else:
+    print("ahmet buyuk")
+s = ahmet.__str__()
+print(f">>> {ahmet} {s}")
+# 200852460
+"""
+"""
+ahmet = Student("ahmet", "culluk")
+veli = Student("veli", "besalt")
+
+veli.__get_fullname()
+
+print(f"{ahmet}, {veli} {global_student_id}")
+"""
+
+"""
+ahmet = Student("ahmet", "culluk")
+veli = Student("veli", "besalt")
+
+toplami = ahmet + veli
+print(toplami)
+
+"""
+
+class Color:
+    red:int
+    green: int
+    blue:int
+    def __init__(self, red:int, green:int, blue:int):
+        self.red = red
+        self.green = green
+        self.blue = blue
+        pass
+    def __str__(self):
+        return f"{self.red} {self.green} {self.blue}"
+    pass
+
+class Vehicle:
+    count_wheel:int = 0
+    color:Color = None
+    horse:int = 0
+    torque:int = 0
+    weight:int = 0
+    def set_color(self, red:int, green:int, blue:int):
+        self.color = Color(red, green, blue)
+        pass
+    pass
+
+
+class Truck(Vehicle):
+    transport_load:int = 0
+    def __init__(self):
+        self.horse = 600
+        self.torque = 500
+        self.color = Color(255, 0, 0)
+        pass
+    pass
+
+class SedanCar(Vehicle):
+    package:str
+    def __init__(self, package):
+        self.package = package
+        self.count_wheel = 4
+        self.horse = 240
+        self.torque = 500
+        pass
+    pass
+
+
+mycar = SedanCar("confort")
+# mycar.set_color()
+
+
+madmax_truck = Truck()
+print(madmax_truck.color)
+print(madmax_truck.weight)
+del madmax_truck
